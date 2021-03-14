@@ -10,8 +10,8 @@ repositories {
 }
 
 dependencies {
-    compile("io.projectreactor", "reactor-core", "3.2.9.RELEASE")
-    testCompile("org.testng", "testng", "7.0.0")
+    implementation("io.projectreactor", "reactor-core", "3.4.3")
+    testImplementation("org.testng", "testng", "7.4.0")
 }
 
 configure<JavaPluginConvention> {
