@@ -11,7 +11,7 @@ repositories {
 
 dependencies {
     implementation("io.projectreactor", "reactor-core", "3.4.3")
-    testImplementation("org.testng", "testng", "7.4.0")
+    testImplementation("org.junit.jupiter", "junit-jupiter-engine", "5.7.1")
 }
 
 configure<JavaPluginConvention> {
@@ -20,6 +20,6 @@ configure<JavaPluginConvention> {
 
 tasks {
     test {
-        useTestNG()
+        useJUnitPlatform()
     }
 }

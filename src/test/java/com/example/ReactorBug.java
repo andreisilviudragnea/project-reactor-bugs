@@ -1,15 +1,14 @@
 package com.example;
 
-import org.testng.annotations.Test;
-
-import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
-
+import org.junit.jupiter.api.RepeatedTest;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
-import static org.testng.Assert.assertEquals;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ReactorBug {
 
@@ -18,7 +17,7 @@ public class ReactorBug {
      * https://github.com/reactor/reactor-core/commit/f47a803087378b30018b969b9c75296b4e549246 fixed the regression
      * 3.2.9.RELEASE is the only affected version
      */
-    @Test(invocationCount = 1_000)
+    @RepeatedTest(1_000)
     public void testBug() {
         long dataSize = 2;
 
@@ -32,7 +31,7 @@ public class ReactorBug {
                 .flatMap(i -> {
                     return Mono
                             .empty()
-                            .subscribeOn(Schedulers.elastic())
+                            .subscribeOn(Schedulers.boundedElastic())
                             .then(Mono.just(""))
 //                            .doOnSuccess(value -> atomicLong2.getAndIncrement())
                             ;
@@ -41,9 +40,9 @@ public class ReactorBug {
                 .collectList()
                 .block();
 
-        assertEquals(atomicLong1.get(), dataSize);
-        assertEquals(atomicLong.get(), dataSize);
-//        assertEquals(atomicLong2.get(), dataSize);
-        assertEquals(strings.size(), dataSize);
+        assertEquals(dataSize, atomicLong1.get());
+        assertEquals(dataSize, atomicLong.get());
+//        assertEquals(dataSize, atomicLong2.get());
+        assertEquals(dataSize, strings.size());
     }
 }
