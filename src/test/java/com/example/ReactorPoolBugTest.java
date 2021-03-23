@@ -20,6 +20,7 @@ public class ReactorPoolBugTest {
     private final InstrumentedPool<String> stringReactivePool = PoolBuilder
             .from(Mono.just("value").delayElement(Duration.ofMillis(2)))
             .maxPendingAcquireUnbounded()
+//            .evictInBackground(Duration.ofSeconds(1))
             .sizeBetween(0, 3)
             .buildPool();
 
