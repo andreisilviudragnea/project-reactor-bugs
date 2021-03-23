@@ -147,7 +147,15 @@ public class MonoUsingWhenBugTest {
                                             return "value";
                                         })
                                         .subscribeOn(Schedulers.boundedElastic())
-                                        .doOnSuccess(unused -> acquireCount1.getAndIncrement());
+                                        .doOnSuccess(unused -> acquireCount1.getAndIncrement())
+//                                        .doOnCancel(() -> {
+//                                            cancelReleaseCount.getAndIncrement();
+//                                            Mono.fromSupplier(() -> {
+//                                                pool.release();
+//                                                return "value";
+//                                            }).doOnSuccess(unused -> cancelReleaseCount1.getAndIncrement()).subscribe();
+//                                        })
+                                        ;
                             }),
                             value -> Mono
                                     .just(value)
