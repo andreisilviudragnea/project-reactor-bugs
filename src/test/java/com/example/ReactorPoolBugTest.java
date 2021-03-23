@@ -145,7 +145,13 @@ public class ReactorPoolBugTest {
                     .flatMap(i -> Mono.usingWhen(
                             Mono.defer(() -> {
                                 acquireCount.getAndIncrement();
-                                return stringReactivePool.acquire().doOnSuccess(unused -> acquireCount1.getAndIncrement());
+                                return stringReactivePool
+                                        .acquire()
+                                        .doOnSuccess(unused -> acquireCount1.getAndIncrement())
+                                        .flatMap(stringPooledRef -> Mono.just(stringPooledRef).doOnCancel(() -> {
+                                            cancelReleaseCount.getAndIncrement();
+                                            stringPooledRef.release().doOnSuccess(unused -> cancelReleaseCount1.getAndIncrement()).subscribe();
+                                        }));
                             }),
                             slot -> Mono
                                     .just(slot.poolable())
