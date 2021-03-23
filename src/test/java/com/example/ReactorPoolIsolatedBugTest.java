@@ -18,6 +18,7 @@ public class ReactorPoolIsolatedBugTest {
     private final InstrumentedPool<String> stringReactivePool = PoolBuilder
             .from(Mono.just("value").delayElement(Duration.ofMillis(2)))
             .maxPendingAcquireUnbounded()
+            .evictInBackground(Duration.ofSeconds(1))
             .sizeBetween(0, 3)
             .buildPool();
 
@@ -90,6 +91,7 @@ public class ReactorPoolIsolatedBugTest {
                     .range(0, 10)
                     .flatMap(i -> stringReactivePool
                             .acquire()
+                            .delayElement(Duration.ofMillis(100))
                             .flatMap(pooledRef -> Mono
                                     .just(pooledRef.poolable())
                                     .delayElement(Duration.ofMillis(10))
