@@ -108,7 +108,7 @@ public class UsingWhenBugTest {
         public void run() {
             Flux<Void> flux = Flux
                     .range(0, 10)
-                    .flatMap(i -> Flux
+                    .flatMap(i -> Mono
                             .usingWhen(
                                     Mono
                                             .fromSupplier(acquireCount::getAndIncrement)
