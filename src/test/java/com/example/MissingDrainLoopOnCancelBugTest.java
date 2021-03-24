@@ -22,29 +22,6 @@ public class MissingDrainLoopOnCancelBugTest {
 			.buildPool();
 
 	@Test
-	public void acquiredSizeBug() {
-		InstrumentedPool.PoolMetrics metrics = stringReactivePool.metrics();
-
-		AtomicReference<Subscription> subscriptionReference = new AtomicReference<>();
-
-		AtomicBoolean next1 = new AtomicBoolean();
-
-		stringReactivePool.acquire().subscribe(
-				stringPooledRef -> next1.set(true),
-				throwable -> System.out.println("error1"),
-				() -> System.out.println("complete1"),
-				subscription -> {
-					subscriptionReference.set(subscription);
-					subscription.request(Long.MAX_VALUE);
-				}
-		);
-
-		assertFalse(next1.get());
-
-		assertEquals(metrics.acquiredSize(), 1); // should be 0
-	}
-
-	@Test
 	public void missingDrainLoopOnCancelBug() {
 		InstrumentedPool.PoolMetrics metrics = stringReactivePool.metrics();
 
