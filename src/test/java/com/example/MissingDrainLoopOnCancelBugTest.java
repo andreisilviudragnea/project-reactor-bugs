@@ -61,7 +61,7 @@ public class MissingDrainLoopOnCancelBugTest {
 
 		System.out.println("after cancel");
 
-		assertEquals(metrics.acquiredSize(), 1); // should be 0 for current implementation, given that no acquire is successful
-		assertEquals(metrics.pendingAcquireSize(), 1); // should be 0
+		assertEquals(0, metrics.acquiredSize());
+		assertEquals(1, metrics.pendingAcquireSize()); // should be 0
 	}
 }

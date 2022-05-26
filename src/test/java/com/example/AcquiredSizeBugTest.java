@@ -39,6 +39,6 @@ public class AcquiredSizeBugTest {
 		assertFalse(error.get());
 		assertFalse(complete.get());
 
-		assertEquals(stringReactivePool.metrics().acquiredSize(), 1); // should be 0
+		assertEquals(0, stringReactivePool.metrics().acquiredSize());
 	}
 }
