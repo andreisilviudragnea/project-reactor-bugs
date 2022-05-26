@@ -7,6 +7,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -17,6 +18,7 @@ public class MonoUsingWhenBugTest {
     private static final int COUNT = 10_000;
 
     @Test
+    @Disabled
     public void monoUsingWhenBug() throws InterruptedException {
         AtomicInteger acquireCount = new AtomicInteger();
         AtomicInteger acquireCount1 = new AtomicInteger();

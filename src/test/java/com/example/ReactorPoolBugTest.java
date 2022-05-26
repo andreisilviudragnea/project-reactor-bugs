@@ -1,5 +1,6 @@
 package com.example;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
@@ -25,6 +26,7 @@ public class ReactorPoolBugTest {
             .buildPool();
 
     @Test
+    @Disabled
     public void reactorPoolBug() throws InterruptedException {
         AtomicInteger acquireCount = new AtomicInteger();
         AtomicInteger acquireCount1 = new AtomicInteger();

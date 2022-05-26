@@ -1,5 +1,6 @@
 package com.example;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -23,6 +24,7 @@ public class ReactorPoolIsolatedBugTest {
             .buildPool();
 
     @Test
+    @Disabled
     public void reactorPoolBug() throws InterruptedException {
         ExecutorService loggerThreads = Executors.newFixedThreadPool(
                 1,
