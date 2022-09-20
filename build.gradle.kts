@@ -12,7 +12,7 @@ repositories {
 dependencies {
     implementation("io.projectreactor", "reactor-core", "3.4.23")
     implementation("io.projectreactor.addons", "reactor-pool", "0.2.9")
-    testImplementation("org.junit.jupiter", "junit-jupiter-engine", "5.9.0")
+    testImplementation("org.junit.jupiter", "junit-jupiter-engine", "5.9.1")
 }
 
 configure<JavaPluginConvention> {
