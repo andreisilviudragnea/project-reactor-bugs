@@ -11,7 +11,7 @@ repositories {
 
 dependencies {
     implementation("io.projectreactor", "reactor-core", "3.5.11")
-    implementation("io.projectreactor.addons", "reactor-pool", "1.0.2")
+    implementation("io.projectreactor.addons", "reactor-pool", "1.0.3")
     testImplementation("org.junit.jupiter", "junit-jupiter-engine", "5.10.0")
 }
 
